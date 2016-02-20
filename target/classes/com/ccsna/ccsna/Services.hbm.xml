@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 17, 2016 8:27:38 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ccsna.ccsna.Services" table="Services" catalog="CCSNA" optimistic-lock="version">
+        <id name="serviceId" type="java.lang.Integer">
+            <column name="service_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="serviceName" type="string">
+            <column name="service_Name" not-null="true" />
+        </property>
+        <property name="dateCreated" type="date">
+            <column name="date_Created" length="10" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="created_By" length="10" />
+        </property>
+        <property name="dateUpdated" type="date">
+            <column name="date_Updated" length="10" />
+        </property>
+        <property name="updatedBy" type="string">
+            <column name="updated_By" length="10" />
+        </property>
+        <property name="service_Type" type="string">
+            <column name="serviceType" length="100" />
+        </property>
+        <set name="agencies" table="AgencyServices" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="ServiceID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.ccsna.ccsna.Agency">
+                <column name="AgencyID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

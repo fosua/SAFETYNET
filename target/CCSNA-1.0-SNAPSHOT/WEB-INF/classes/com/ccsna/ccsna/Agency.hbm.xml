@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 17, 2016 8:27:38 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ccsna.ccsna.Agency" table="Agency" catalog="CCSNA" optimistic-lock="version">
+        <id name="agencyId" type="java.lang.Integer">
+            <column name="agency_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="fullname" type="string">
+            <column name="fullname" not-null="true" />
+        </property>
+        <property name="streetAddress" type="string">
+            <column name="street_Address" length="150" />
+        </property>
+        <property name="apartmentNo" type="string">
+            <column name="apartment_No" length="50" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="50" />
+        </property>
+        <property name="state" type="string">
+            <column name="state" length="100" />
+        </property>
+        <property name="zipcode" type="java.lang.Long">
+            <column name="zipcode" precision="10" scale="0" />
+        </property>
+        <property name="privateContactNumber" type="java.lang.Long">
+            <column name="private_Contact_Number" precision="10" scale="0" />
+        </property>
+        <property name="websiteAddress" type="string">
+            <column name="website_Address" length="200" />
+        </property>
+        <property name="dateCreated" type="date">
+            <column name="date_Created" length="10" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="created_By" length="10" />
+        </property>
+        <property name="dateUpdated" type="date">
+            <column name="date_Updated" length="10" />
+        </property>
+        <property name="updatedBy" type="string">
+            <column name="updated_By" length="10" />
+        </property>
+        <property name="mission" type="string">
+            <column name="mission" length="200" />
+        </property>
+        <property name="hoursOfOperation" type="string">
+            <column name="hours_Of_Operation" />
+        </property>
+        <property name="requiredVerification" type="string">
+            <column name="required_Verification" />
+        </property>
+        <property name="boardPositions" type="string">
+            <column name="board_Positions" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="10" />
+        </property>
+        <property name="emailAddress" type="string">
+            <column name="email_Address" length="45" />
+        </property>
+        <property name="publicContactNumber" type="java.lang.Long">
+            <column name="public_Contact_Number" precision="10" scale="0" />
+        </property>
+        <set name="counties" table="AgencyCountyServed" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="Agency_ID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.ccsna.ccsna.County">
+                <column name="County_ID" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="members" table="Member" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="agencyID" not-null="true" />
+            </key>
+            <one-to-many class="com.ccsna.ccsna.Member" />
+        </set>
+        <set name="serviceses" table="AgencyServices" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="AgencyID" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.ccsna.ccsna.Services">
+                <column name="ServiceID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
